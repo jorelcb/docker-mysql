@@ -32,7 +32,8 @@ RUN { \
 # comment out a few problematic configuration values
 RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf
 
-VOLUME /var/lib/mysql
+RUN mkdir -p /srv/dbdata
+VOLUME ["/srv/dbdata", "/var/lib/mysql"]
 
 COPY config/docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
